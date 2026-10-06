@@ -78,9 +78,9 @@ async def run_agent(message: str, history: list[str] | None = None, customer: di
                 if stock.results:
                     item = stock.results[0]
                     availability = f'{item.quantity} in stock' if item.quantity > 0 else 'out of stock'
-            response = ChatReply(reply=f'{candidates[0].name} has {availability} in size {item.size}.', products=[candidates[0]])
-            audit_event('agent_loop', message, response.reply, 'complete')
-            return response
+                    response = ChatReply(reply=f'{candidates[0].name} has {availability} in size {item.size}.', products=[candidates[0]])
+                    audit_event('agent_loop', message, response.reply, 'complete')
+                    return response
                 response = ChatReply(reply=f'{requested_size} is not listed in the inventory for {candidates[0].name}, so I cannot confirm a quantity for that size.', products=[candidates[0]])
                 audit_event('agent_loop', message, response.reply, 'complete')
                 return response
